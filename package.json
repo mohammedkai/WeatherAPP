@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
+    "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
     "node-sass": "^5.0.0",
     "sass-loader": "^10.1.1",
@@ -39,9 +41,6 @@
     "last 2 versions",
     "not dead"
   ],
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
   "lint-staged": {
     "*.{js,jsx,vue}": [
       "vue-cli-service lint",

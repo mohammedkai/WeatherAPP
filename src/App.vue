@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'App',
@@ -36,40 +36,39 @@ export default {
       api_key: process.env.VUE_APP_API_KEY,
       query: '',
       gettingLocation: false,
-      errorStr:null
+      errorStr: null
     }
   },
 
-  created() {
-    debugger;
-    //do we support geolocation
-    if(!("geolocation" in navigator)) {
-      this.errorStr = 'Geolocation is not available.';
-      return;
+  created () {
+    // do we support geolocation
+    if (!('geolocation' in navigator)) {
+      this.errorStr = 'Geolocation is not available.'
+      return
     }
 
-    this.gettingLocation = true;
+    this.gettingLocation = true
     // get position
     navigator.geolocation.getCurrentPosition(pos => {
-      this.gettingLocation = false;
-      this.getCurrentWeatherByCordinates({lat: pos.coords.latitude ,lon:pos.coords.longitude})
+      this.gettingLocation = false
+      this.getCurrentWeatherByCordinates({ lat: pos.coords.latitude, lon: pos.coords.longitude })
     }, err => {
-      this.gettingLocation = false;
-      this.errorStr = err.message;
-    });
+      this.gettingLocation = false
+      this.errorStr = err.message
+    })
   },
 
-    computed: {
+  computed: {
     ...mapGetters({
-      weather: 'weatherModule/getCurrentWeatherData',
-    }),
+      weather: 'weatherModule/getCurrentWeatherData'
+    })
   },
   methods: {
-     ...mapActions('weatherModule', ['getCurrentWeatherByCityName','getCurrentWeatherByCordinates']),
+    ...mapActions('weatherModule', ['getCurrentWeatherByCityName', 'getCurrentWeatherByCordinates']),
     fetchWeather (e) {
       console.log(process.env.VUE_APP_API_KEY)
       if (e.key == 'Enter') {
-        this.getCurrentWeatherByCityName({city: this.query });
+        this.getCurrentWeatherByCityName({ city: this.query })
       }
     },
     dateBuilder () {
