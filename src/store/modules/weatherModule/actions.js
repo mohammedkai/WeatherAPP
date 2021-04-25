@@ -2,46 +2,45 @@ import axios from 'axios'
 
 const actions = {
 
-  getCurrentWeatherByCityName({ commit }, payload){
+  getCurrentWeatherByCityName ({ commit }, payload) {
     const { city } = payload
-    return axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
+    return axios.get('https://api.openweathermap.org/data/2.5/weather', {
       params: {
-        q:city,
-        units:"metric",
-        APPID:process.env.VUE_APP_API_KEY
+        q: city,
+        units: 'metric',
+        APPID: process.env.VUE_APP_API_KEY
       }
     }).then((response) => {
-      debugger;
+      debugger
       commit('SET_CURRENT_WEATHER', response.data)
       return response
     }).catch((errors) => {
-      debugger;
+      debugger
       commit('SET_PAGE_STATUS', 'ERROR')
       return errors
     })
   },
 
-  getCurrentWeatherByCordinates({ commit }, payload){
-    debugger;
-    const { lat } = payload;
-    const { lon } = payload;
-    return axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
+  getCurrentWeatherByCordinates ({ commit }, payload) {
+    const { lat } = payload
+    const { lon } = payload
+    return axios.get('https://api.openweathermap.org/data/2.5/weather', {
       params: {
         lat,
         lon,
-        units:"metric",
-        APPID:process.env.VUE_APP_API_KEY
+        units: 'metric',
+        APPID: process.env.VUE_APP_API_KEY
       }
     }).then((response) => {
-      debugger;
+      debugger
       commit('SET_CURRENT_WEATHER', response.data)
       return response
     }).catch((errors) => {
-      debugger;
+      debugger
       commit('SET_PAGE_STATUS', 'ERROR')
       return errors
     })
-  },
+  }
 
 }
 
